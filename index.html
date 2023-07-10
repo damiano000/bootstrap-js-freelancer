@@ -1,3 +1,25 @@
+<!-- Continuiamo l’esercizio Bootstrap Freelancer e aggiungiamo la componente js di interazione con l’utente.
+Quando l’utente fa click sul bottone “send” del form, il sito deve calcolare l’ammontare del preventivo per le ore di lavoro richieste.
+Il prezzo orario per una commissione varia in questo modo:
+- se la commissione riguarda lo sviluppo backend il prezzo orario è di 20.5€ l’ora
+- se la commissione riguarda lo sviluppo frontend il prezzo orario è di 15.3€ l’ora
+- se la commissione riguarda l’analisi progettuale di un progetto il prezzo orario è di 33.6€
+L’utente potrebbe decidere di utilizzare un codice promozionale tra i seguenti:
+- YHDNU32
+- JANJC63
+- PWKCN25
+- SJDPO96
+- POCIE24
+Se l’utente inserisce un codice promozionale valido, ha diritto ad uno sconto del 25% sul prezzo finale. Se il codice inserito non è valido, il sito deve informare l’utente che il codice non è valido e il prezzo finale viene calcolato senza applicare sconti.
+Il risultato del calcolo del prezzo finale deve essere visualizzato in “forma umana” (con 2 decimali e il simbolo dell’euro) in un apposito tag HTML appena sotto il bottone send.
+Alcuni consigli
+- Ricordatevi che se non state bene attenti, Javascript vi fa le magie con i tipi :faccia_leggermente_sorridente:
+- Ricordatevi che il form ha un comportamento “strano” quando fate click sul bottone Send che è di tipo submit (type=submit).
+-->
+
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -149,23 +171,30 @@
                         <input type="email" class="form-control" placeholder="name@example.com">
                     </div>
 
+                    <!--id per le ore richieste-->
                     <div class="col">
                         <label for="exampleFormControlInput1" class="form-label">Hours requested</label>
-                        <input type="email" class="form-control" placeholder="Hours requested...">
+                        <input type="number" class="form-control" id="hoursRequested" placeholder="Hours requested...">
+
                     </div>
                 </div>
-
+                <!--id select per il tipo di lavoro-->
                 <div class="row">
                     <div class="col-6 col-sm-6">
                         <label for="disabledSelect" class="form-label">Type of work</label>
-                        <select id="disabledSelect" class="form-select">
+                        <select id="workType" class="form-select">
                             <option>Select the type of work</option>
+                            <option value="backend">Backend Development</option>
+                            <option value="frontend">Frontend Development</option>
+                            <option value="analysis">Project Analysis</option>
                         </select>
-                    </div>
 
+                    </div>
+                    <!--id per codice promozionale-->
                     <div class="col">
                         <label for="exampleFormControlInput1" class="form-label">Discount code</label>
-                        <input type="email" class="form-control">
+                        <input type="text" class="form-control" id="promoCode">
+
                     </div>
                 </div>
 
@@ -179,6 +208,9 @@
                     <div class="col">
                         <button type="button"
                             class="btn btn-warning text-center btn-sm d-grid gap-2 col-1 mx-auto">Send</button>
+                            <div class="col">
+                                <span id="quoteResult"></span>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -187,7 +219,7 @@
         </section>
 
     </footer>
-<!-- ultima parte della pagina -->
+    <!-- ultima parte della pagina -->
     <footer class="bg-dark text-center text-white-50 pt-4">
         <div class="container-fluid">
             <div class="row">
@@ -202,13 +234,13 @@
     </footer>
 
 
-<!-- Script-->
-   
-
-<script type="text/javascript" src="/main.js"></script>
+    <!-- Script-->
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    <script type="text/javascript" src="/main.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 </body>
